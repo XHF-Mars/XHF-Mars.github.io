@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript">
+
+			function addRow() {
+				var inputn = document.getElementById("mingzi");
+				var table = document.getElementById("TXL");
+				var rows = table.rows.length;
+				var inputvalue = inputn.value;
+				var radio = document.getElementsByClassName("sex");
+				var selectvalue = null; 
+				for (var i = 0; i < radio.length; i++) {
+					if (radio[i].checked == true) {
+						selectvalue = radio[i].value;
+						break;
+					}
+				}
+				if (inputvalue != "" && selectvalue != null) {
+					var newTr = TXL.insertRow(); 
+					var newTd0 = newTr.insertCell();
+					var newTd1 = newTr.insertCell();
+					var newTd2 = newTr.insertCell();
+					var newTd3 = newTr.insertCell(); 
+					newTd0.innerText = rows;
+					newTd1.innerText = inputvalue;
+					newTd2.innerText = selectvalue;
+					newTd3.innerHTML = "<a href='javascript:void(0);' onclick='det(this);'>删除</a>";
+					newTd1.addEventListener("mouseover", function() {
+						this.style.color = "red";
+					}); 
+					newTd1.addEventListener("mouseleave", function() {
+						this.style.color = "black";
+					}); 
+				} 
+			}
+
+			function det(r) {
+				var i = r.parentNode.parentNode.rowIndex;
+				document.getElementById('TXL').deleteRow(i);
+			}
+
+			function hw(obj) {
+				obj.style.color = "red";
+			}
+
+			function txl(obj) {
+				obj.style.color = "black";
+			}
+		</script>
+		
+
+		<style>
+			*{
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<h2 align="center">学生基本信息录入</h2>
+		<p align="center">Tip :输入学号，选择性别，再点击添加。</p>
+		<p align="center" id="info" style="display: inline-flex;margin-left:38%;">
+			姓名 : <input type="text" id="mingzi">
+			性别 : <td><input type="radio" name="sex" class="sex" value="男" checked="checked" />男</td>
+			<td><input type="radio" name="sex" class="sex" value="女" />女</td>
+		</p>
+
+		<div align="center" style="display: inline-flex;"><input type="button" value="添加" onclick="addRow()"></div>
+		
+		<table align="center" border="1" id="TXL" style="width: 57%;text-align: center;border:1px solid black">
+			<tr>
+				<td>序号</td>
+				<td>姓名</td>
+				<td>性别</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td onmouseover="hw(this)" onmouseleave="txl(this)">渣渣辉</td>
+				<td>男</td>
+				<td><a href='javascript:void(0);' onclick='det(this);'>删除</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td onmouseover="hw(this)" onmouseleave="txl(this)">渣渣辉</td>
+				<td>男</td>
+				<td><a href='javascript:void(0);' onclick='det(this);'>删除</a></td>
+			</tr>
+		</table>
+
+	</body>
+</html>
